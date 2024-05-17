@@ -32,7 +32,6 @@ func runFoodSimulator(fds *FoodStore) {
 	}
 	members := fds.GetMembers()
 	orders := []*Order{
-		// not member
 		NewOrder(orderItemsFunc(5), nil, fds),
 		NewOrder(orderItemsFunc(3), getRandomMember(members), fds),
 		NewOrder(orderItemsFunc(3), getRandomMember(members), fds),
@@ -54,8 +53,8 @@ func getRandomFoodItems(items map[string]*Item, amount int) []*Item {
 	}
 
 	out := make([]*Item, 0, amount)
-	for _ = range amount {
-		// Generate a random index
+	for range amount {
+		// Get a random index
 		randomIndex := rd.Intn(len(keys))
 		// Select a random key
 		randomKey := keys[randomIndex]
@@ -75,7 +74,7 @@ func getRandomMember(members map[MemberID]*Member) *Member {
 		keys = append(keys, key)
 	}
 
-	// Generate a random index
+	// Get a random index
 	randomIndex := rd.Intn(len(keys))
 	// Select a random key
 	randomKey := keys[randomIndex]

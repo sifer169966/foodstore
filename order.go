@@ -54,7 +54,6 @@ func (o *Order) Checkout() {
 		if !promotion.isMatchCondition(o) {
 			continue
 		}
-		// added a new one if does not exist
 		_, ok := o.AppliedDiscountPromotions[promotion.Name]
 		if !ok {
 			o.AppliedDiscountPromotions[promotion.Name] = promotion
