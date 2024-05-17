@@ -18,7 +18,7 @@ func main() {
 	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
 		for {
-			runFoodSimulator(fds)
+			runFoodStoreSimulator(fds)
 			time.Sleep(1 * time.Second)
 		}
 	}()
@@ -26,7 +26,7 @@ func main() {
 	fmt.Println("closed")
 }
 
-func runFoodSimulator(fds *FoodStore) {
+func runFoodStoreSimulator(fds *FoodStore) {
 	items := fds.GetItems()
 	rd := rand.New(rand.NewSource(time.Now().UnixNano()))
 	orderItemsFunc := func(amount int) []OrderItem {
