@@ -12,7 +12,7 @@ func (dc *DiscountPromotion) isMatchCondition(order *Order) bool {
 }
 
 func PromotionSeeds() []*DiscountPromotion {
-	isDoubleOrangePinkGreen := func(order *Order) bool {
+	isDoubleRedPinkGreen := func(order *Order) bool {
 		greenCount, pinkCount, redCount := 0, 0, 0
 		for _, v := range order.Items {
 			switch v.Name {
@@ -49,7 +49,7 @@ func PromotionSeeds() []*DiscountPromotion {
 	}
 	return []*DiscountPromotion{
 		{
-			Condition:          isDoubleOrangePinkGreen,
+			Condition:          isDoubleRedPinkGreen,
 			Name:               "DoubleRed|Pink|Green",
 			Description:        "The order contains Red Coffee, Pink Coffee or Green Coffee more than 1",
 			DiscountPercentage: 5,
