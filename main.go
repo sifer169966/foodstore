@@ -1,7 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -10,7 +14,16 @@ func main() {
 	fds.UpsertItems(ItemSeeds...)
 	fds.UpsertDiscountPromotions(PromotionSeeds()...)
 	fds.UpsertMembers(MemberSeeds...)
-	runFoodSimulator(fds)
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		for {
+			runFoodSimulator(fds)
+			time.Sleep(1 * time.Second)
+		}
+	}()
+	<-sigCh
+	fmt.Println("closed")
 }
 
 func runFoodSimulator(fds *FoodStore) {
@@ -25,7 +38,7 @@ func runFoodSimulator(fds *FoodStore) {
 					Name:  v.Name,
 					Price: v.Price,
 				},
-				Amount: uint(rd.Intn(100)),
+				Amount: uint(rd.Intn(10)),
 			})
 		}
 		return out

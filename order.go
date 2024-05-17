@@ -74,5 +74,5 @@ func (o *Order) Checkout() {
 	fmt.Println("TotalDiscountPercentage: ", totalDiscountPercentage)
 	fmt.Println("DiscountAmount: ", discountAmount)
 	fmt.Printf("FinalTotal: %v\n", o.TotalPrice)
-	fmt.Println("============================================================")
+	fmt.Println("-----------------------------------------------------------------")
 }

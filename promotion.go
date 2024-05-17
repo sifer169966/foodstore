@@ -13,21 +13,21 @@ func (dc *DiscountPromotion) isMatchCondition(order *Order) bool {
 
 func PromotionSeeds() []*DiscountPromotion {
 	isDoubleOrangePinkGreen := func(order *Order) bool {
-		orangeCount, pinkCount, greenCount := 0, 0, 0
+		greenCount, pinkCount, redCount := 0, 0, 0
 		for _, v := range order.Items {
 			switch v.Name {
 			case "Green Coffee":
-				orangeCount++
+				greenCount++
 			case "Pink Coffee":
 				pinkCount++
 			case "Red Coffee":
-				greenCount++
+				redCount++
 			}
 		}
 		isGreaterThanOne := func(counter int) bool {
 			return counter > 1
 		}
-		return isGreaterThanOne(orangeCount) || isGreaterThanOne(pinkCount) || isGreaterThanOne(greenCount)
+		return isGreaterThanOne(greenCount) || isGreaterThanOne(pinkCount) || isGreaterThanOne(redCount)
 	}
 	isMemberPriviledgeLevel1 := func(order *Order) bool {
 		if order.Member == nil {
